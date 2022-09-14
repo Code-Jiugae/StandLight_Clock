@@ -1,9 +1,13 @@
 #include "View.h"
-#include <iostream>
+#include <wiringPi.h>
 
-View::View(Led *led)
+View::View(Led *led1, Led *led2, Led *led3, Led *led4, Led *led5)
 {
-    light = led;
+    light1 = led1;
+    light2 = led2;
+    light3 = led3;
+    light4 = led4;
+    light5 = led5;
     lightState = LIGHT_OFF;
 }
 
@@ -11,108 +15,87 @@ View::~View()
 {
 }
 
-void View::UpdateState(std::string strState)
+void View::setState(int state)
+{
+    lightState = state;
+}
+
+void View::lightView()
 {
     switch (lightState)
     {
     case LIGHT_OFF:
-        if (strState == "StateOn1")
-        {
-            lightState = LIGHT_ON_1;
-        }
+        lightOff();
         break;
 
-    case LIGHT_ON_1:
-        if (strState == "StateOn2")
-        {
-            lightState = LIGHT_ON_2;
-        }
+    case LIGHT_1:
+        lightOn_1();
         break;
-
-    case LIGHT_ON_2:
-        if (strState == "StateOn3")
-        {
-            lightState = LIGHT_ON_3;
-        }
+    case LIGHT_2:
+        lightOn_2();
         break;
-
-    case LIGHT_ON_3:
-        if (strState == "StateOn4")
-        {
-            lightState = LIGHT_ON_4;
-        }
+    case LIGHT_3:
+        lightOn_3();
         break;
-    case LIGHT_ON_4:
-        if (strState == "StateOn5")
-        {
-            lightState = LIGHT_ON_5;
-        }
+    case LIGHT_4:
+        lightOn_4();
         break;
-    case LIGHT_ON_5:
-        if (strState == "StateOff")
-        {
-            lightState = LIGHT_OFF;
-        }
-        break;
-
-    default:
+    case LIGHT_5:
+        lightOn_5();
         break;
     }
 }
 
-void View::LightView()
+void View::lightOn_1()
 {
-    switch (lightState)
-    {
-    case LIGHT_OFF:
-        LightOff(0);
-        LightOff(1);
-        LightOff(2);
-        LightOff(3);
-        LightOff(4);
-        break;
-
-    case LIGHT_ON_1:
-        LightOn(0);
-        break;
-    case LIGHT_ON_2:
-        LightOn(1);
-        break;
-    case LIGHT_ON_3:
-        LightOn(2);
-        break;
-    case LIGHT_ON_4:
-        LightOn(3);
-        break;
-    case LIGHT_ON_5:
-        LightOn(4);
-        break;
-
-    default:
-        break;
-    }
+    light1->On();
+    light2->Off();
+    light3->Off();
+    light4->Off();
+    light5->Off();
 }
 
-// void View::LightOn()
-// {
-//     light->On();
-// }
-
-// void View::LightOn()
-// {
-//     static unsigned int prevTime = 0;
-//     if (millis() - prevTime < 300)
-//         return;
-//     prevTime = millis();
-//     light->Toggle();
-// }
-
-void View::LightOn(int cnt)
+void View::lightOn_2()
 {
-    light->On(cnt);
+    light1->On();
+    light2->On();
+    light3->Off();
+    light4->Off();
+    light5->Off();
 }
 
-void View::LightOff(int cnt)
+void View::lightOn_3()
 {
-    light->Off(cnt);
+    light1->On();
+    light2->On();
+    light3->On();
+    light4->Off();
+    light5->Off();
+}
+
+void View::lightOn_4()
+{
+    light1->On();
+    light2->On();
+    light3->On();
+    light4->On();
+    light5->Off();
+}
+
+void View::lightOn_5()
+{
+    light1->On();
+    light2->On();
+    light3->On();
+    light4->On();
+    light5->On();
+}
+
+void View::lightOff()
+{
+    light1->Off();
+    light2->Off();
+    light3->Off();
+    light4->Off();
+    light5->Off();
 }

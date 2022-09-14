@@ -1,22 +1,19 @@
-#ifndef LISTENER_H
-#define LISTENER_H
-
-#pragma once
+#ifndef __LISTENER_H__
+#define __LISTENER_H__
 
 #include "Button.h"
 #include "Controller.h"
 
 class Listener
 {
-private:
+private :
     Button *powerButton;
     Controller *controller;
-    int cnt = 0;
+
 public:
     Listener(Button *button, Controller *control);
     ~Listener();
-    void CheckEvent();
-
+    void checkEvent();
 };
 
-#endif
+#endif /* __LISTENER_H__ */

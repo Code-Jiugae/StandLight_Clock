@@ -1,43 +1,35 @@
 #include "Led.h"
 #include "wiringPi.h"
 
-Led::Led(int pin, int cnt)
+Led::Led(int pin)
     : pinNumber(pin), ledState(OFF)
 {
     wiringPiSetup();
-    for(int i = 0; i <= cnt; i++)
-        pinMode(pinNumber+i, OUTPUT);
-    InitLed(cnt);
+    pinMode(pinNumber, OUTPUT);
 }
 
 Led::~Led()
 {
 }
 
-void Led::InitLed(int cnt)
+void Led::writePin(bool pinState)
 {
-    for(int i = 0; i <= cnt; i++)
-        writePin(i, OFF);
+    digitalWrite(pinNumber, (int)pinState);
 }
 
-void Led::writePin(int pinCnt, bool pinState)
-{
-    digitalWrite(pinNumber+pinCnt, (int)pinState);
-}
-
-void Led::On(int pinCnt)
+void Led::On()
 {
     ledState = ON;
-    writePin(pinCnt, ledState);
+    writePin(ledState);
 }
 
-void Led::Off(int pinCnt)
+void Led::Off()
 {
     ledState = OFF;
-    writePin(pinCnt, ledState);
+    writePin(ledState);
 }
-void Led::Toggle(int pinCnt)
+void Led::Toggle()
 {
     ledState ^= 1;
-    writePin(pinCnt, ledState);
+    writePin(ledState);
 }

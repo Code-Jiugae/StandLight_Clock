@@ -1,20 +1,19 @@
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
+#ifndef __CONTROLLER_H__
+#define __CONTROLLER_H__
 
-#pragma once
 #include <string>
-#include "View.h"
+#include "Service.h"
 
 class Controller
 {
 private:
     int lightState;
-    View *view;
+    Service *service;
 
 public:
-    Controller(View *viewer);
+    Controller(Service *serv);
     virtual ~Controller();
     void updateEvent(std::string strBtn);
 };
 
-#endif
+#endif /* __CONTROLLER_H__ */
