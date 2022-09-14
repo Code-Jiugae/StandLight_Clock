@@ -17,8 +17,8 @@ void Listener::checkEvent()
         controller->updateEvent("powerButton");
     }
 
-    if (timeClock->isUpdate())
-    {
-        controller->updateEvent("clockUpdate");
-    }
+    // if (timeClock->isUpdate())
+    // {
+    //     controller->updateEvent("clockUpdate");
+    // }
 }

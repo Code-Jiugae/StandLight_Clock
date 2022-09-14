@@ -2,21 +2,25 @@ cmake_minimum_required(VERSION 3.0.0)
 
 project(StandLight)
 
-add_executable(${PROJECT_NAME} 
+add_executable(${PROJECT_NAME}
     ./src/main.cpp
+    ./src/app/Service/Service.cpp
     ./src/app/Listener/Listener.cpp
     ./src/app/Controller/Controller.cpp
     ./src/app/View/View.cpp
     ./src/hw/Button/Button.cpp
     ./src/hw/Led/Led.cpp
+    ./src/hw/ClockCheck/ClockCheck.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
+    ./src/app/Service
     ./src/app/Listener
     ./src/app/Controller
     ./src/app/View
     ./src/hw/Button
     ./src/hw/Led
+    ./src/hw/ClockCheck
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
