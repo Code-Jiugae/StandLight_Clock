@@ -13,7 +13,7 @@ private :
     Controller *controller;
 
 public:
-    Listener(Button *button, Controller *control);
+    Listener(Button *button, Controller *control, ClockCheck *clock);
     ~Listener();
     void checkEvent();
 };

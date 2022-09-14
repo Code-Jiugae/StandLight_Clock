@@ -5,6 +5,10 @@
 #include "Listener.h"
 #include "Controller.h"
 #include "View.h"
+#include "LCD.h"
+#include "ClockView.h"
+#include "ClockService.h"
+#include "ClockCheck.h"
 #include <time.h>
 
 int main()
@@ -13,27 +17,23 @@ int main()
     time_t timeSec;
     struct tm *timeData;
 
-    // while (1)
-    // {
-    //     timeSec = time(NULL);
-    //     timeData = localtime(&timeSec);
-    //     std::cout << "timeSec : " << timeSec << std::endl;
-    //     std::cout << timeData->tm_hour << " : "
-    //               << timeData->tm_min << " : "
-    //               << timeData->tm_sec << std::endl;
-    //     delay(100);
-    // }
-    
+    ClockCheck clockCheck;
     Button button1(27);
     Led led1(21);
     Led led2(22);
     Led led3(23);
     Led led4(24);
     Led led5(25);
+    LCD lcd(new I2C("/dev/i2c-1", 0x27));
+
     View view(&led1, &led2, &led3, &led4, &led5);
+    ClockView clockView(&lcd);
+
     Service service(&view);
-    Controller control(&service);
-    Listener listener(&button1, &control);
+    ClockService clockService(&clockView);
+
+    Controller control(&service, &clockService);
+    Listener listener(&button1, &control, &clockCheck);
 
     while (1)
     {
