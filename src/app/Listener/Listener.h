@@ -2,12 +2,14 @@
 #define __LISTENER_H__
 
 #include "Button.h"
+#include "ClockCheck.h"
 #include "Controller.h"
 
 class Listener
 {
 private :
-    Button *powerButton;
+    Button *modeButton;
+    ClockCheck *clockCheck;
     Controller *controller;
 
 public:

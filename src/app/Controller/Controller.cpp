@@ -13,8 +13,13 @@ Controller::~Controller()
 void Controller::updateEvent(std::string strBtn)
 {
    
-    if (strBtn == "powerButton")
+    if (strBtn == "modeButton")
     {
         service->updateState("modeButton");
+    }
+    
+    if (strBtn == "clockUpdate")
+    {
+        // clockService->updateState("clockUpdate");
     }
 }
