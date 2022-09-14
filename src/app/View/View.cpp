@@ -1,14 +1,19 @@
 #include "View.h"
 #include <wiringPi.h>
 
-View::View(Led *led1, Led *led2, Led *led3, Led *led4, Led *led5)
+View::View(Led *led1, Led *led2, Led *led3, Led *led4, Led *led5, LCD *lcd)
 {
+    char buff[30];
+    int state = 0;
+    sprintf(buff, "state : %d", state);
+    lcd->WriteStringXY(0, 0, buff);
     light1 = led1;
     light2 = led2;
     light3 = led3;
     light4 = led4;
     light5 = led5;
     lightState = LIGHT_OFF;
+    this->lcd = lcd;
 }
 
 View::~View()
@@ -18,6 +23,9 @@ View::~View()
 void View::setState(int state)
 {
     lightState = state;
+    char buff[30];
+    sprintf(buff, "state : %d", state);
+    lcd->WriteStringXY(0, 0, buff);
 }
 
 void View::lightView()
